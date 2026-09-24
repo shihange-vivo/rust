@@ -35,11 +35,17 @@ pub struct Finder {
 const STAGE0_MISSING_TARGETS: &[&str] = &[
     // just a dummy comment so the list doesn't get onelined
     "thumbv7m-vivo-blueos-newlibeabi",
+    "thumbv7m-vivo-blueos-newlibeabi-static",
     "thumbv8m.main-vivo-blueos-newlibeabihf",
+    "thumbv8m.main-vivo-blueos-newlibeabihf-static",
     "aarch64-vivo-blueos-newlib",
+    "aarch64-vivo-blueos-newlib-static",
     "riscv64-vivo-blueos",
+    "riscv64-vivo-blueos-static",
     "riscv32-vivo-blueos",
+    "riscv32-vivo-blueos-static",
     "riscv32imc-vivo-blueos",
+    "riscv32imc-vivo-blueos-static",
 ];
 
 /// Minimum version threshold for libstdc++ required when using prebuilt LLVM

@@ -12,7 +12,21 @@ linker = "arm-none-eabi-gcc"
 ar = "arm-none-eabi-ar"
 ranlib = "arm-none-eabi-ranlib"
 
+[target.thumbv7m-vivo-blueos-newlibeabi-static]
+cc = "arm-none-eabi-gcc"
+cxx = "arm-none-eabi-g++"
+linker = "arm-none-eabi-gcc"
+ar = "arm-none-eabi-ar"
+ranlib = "arm-none-eabi-ranlib"
+
 [target."thumbv8m.main-vivo-blueos-newlibeabihf"]
+cc = "arm-none-eabi-gcc"
+cxx = "arm-none-eabi-g++"
+linker = "arm-none-eabi-gcc"
+ar = "arm-none-eabi-ar"
+ranlib = "arm-none-eabi-ranlib"
+
+[target."thumbv8m.main-vivo-blueos-newlibeabihf-static"]
 cc = "arm-none-eabi-gcc"
 cxx = "arm-none-eabi-g++"
 linker = "arm-none-eabi-gcc"
@@ -26,39 +40,70 @@ linker = "aarch64-none-elf-gcc"
 ar = "aarch64-none-elf-ar"
 ranlib = "aarch64-none-elf-ranlib"
 
+[target."aarch64-vivo-blueos-newlib-static"]
+cc = "aarch64-none-elf-gcc"
+cxx = "aarch64-none-elf-g++"
+linker = "aarch64-none-elf-gcc"
+ar = "aarch64-none-elf-ar"
+ranlib = "aarch64-none-elf-ranlib"
+
 [target."riscv64-vivo-blueos"]
 cc = "clang"
 cxx = "clang++"
-linker = "clang"
+linker = "rust-lld"
+ar = "llvm-ar"
+ranlib = "llvm-ranlib"
+
+[target."riscv64-vivo-blueos-static"]
+cc = "clang"
+cxx = "clang++"
+linker = "rust-lld"
 ar = "llvm-ar"
 ranlib = "llvm-ranlib"
 
 [target."riscv32-vivo-blueos"]
 cc = "clang"
 cxx = "clang++"
-linker = "clang"
+linker = "rust-lld"
+ar = "llvm-ar"
+ranlib = "llvm-ranlib"
+
+[target."riscv32-vivo-blueos-static"]
+cc = "clang"
+cxx = "clang++"
+linker = "rust-lld"
 ar = "llvm-ar"
 ranlib = "llvm-ranlib"
 
 [target."riscv32imc-vivo-blueos"]
 cc = "clang"
 cxx = "clang++"
-linker = "clang"
+linker = "rust-lld"
+ar = "llvm-ar"
+ranlib = "llvm-ranlib"
+
+[target."riscv32imc-vivo-blueos-static"]
+cc = "clang"
+cxx = "clang++"
+linker = "rust-lld"
 ar = "llvm-ar"
 ranlib = "llvm-ranlib"
 
 [target.x86_64-unknown-linux-gnu]
 profiler = true
 sanitizers = true
+rpath = true
 
 [target.aarch64-apple-darwin]
 profiler = true
 sanitizers = true
+rpath = true
 
 [rust]
 omit-git-hash = false
 deny-warnings = false
 strip = true
+rpath = false
 
 [dist]
 compression-formats = ["xz"]

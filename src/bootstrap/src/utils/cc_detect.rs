@@ -62,14 +62,26 @@ fn cc2ar(cc: &Path, target: TargetSelection) -> Option<PathBuf> {
 
 fn new_cc_build(build: &Build, target: TargetSelection) -> cc::Build {
     let mut cfg = cc::Build::new();
+    // Rust target names describe the linking mode, but Clang does not accept
+    // the `-static` suffix as part of a target triple. Use the corresponding
+    // C target and keep the ISA/ABI in sync with the Rust target specification.
+    let (cc_target, march, mabi) = match &*target.triple {
+        "riscv64-vivo-blueos-static" => ("riscv64-vivo-blueos", "rv64imac", "lp64"),
+        "riscv32-vivo-blueos-static" => ("riscv32-vivo-blueos", "rv32imac", "ilp32"),
+        "riscv32imc-vivo-blueos-static" => ("riscv32-vivo-blueos", "rv32imc", "ilp32"),
+        _ => (&*target.triple, "", ""),
+    };
     cfg.cargo_metadata(false)
         .opt_level(2)
         .warnings(false)
         .debug(false)
         // Compress debuginfo
         .flag_if_supported("-gz")
-        .target(&target.triple)
+        .target(cc_target)
         .host(&build.build.triple);
+    if !march.is_empty() {
+        cfg.flag(&format!("-march={march}")).flag(&format!("-mabi={mabi}"));
+    }
     match build.crt_static(target) {
         Some(a) => {
             cfg.static_crt(a);

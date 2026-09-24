@@ -1948,11 +1948,17 @@ supported_targets! {
     ("riscv64imac-unknown-nuttx-elf", riscv64imac_unknown_nuttx_elf),
     ("riscv64gc-unknown-nuttx-elf", riscv64gc_unknown_nuttx_elf),
     ("thumbv7m-vivo-blueos-newlibeabi", thumbv7m_vivo_blueos_newlibeabi),
+    ("thumbv7m-vivo-blueos-newlibeabi-static", thumbv7m_vivo_blueos_newlibeabi_static),
     ("thumbv8m.main-vivo-blueos-newlibeabihf", thumbv8m_main_vivo_blueos_newlibeabihf),
+    ("thumbv8m.main-vivo-blueos-newlibeabihf-static", thumbv8m_main_vivo_blueos_newlibeabihf_static),
     ("aarch64-vivo-blueos-newlib", aarch64_vivo_blueos_newlib),
+    ("aarch64-vivo-blueos-newlib-static",aarch64_vivo_blueos_newlib_static),
     ("riscv64-vivo-blueos", riscv64_vivo_blueos),
+    ("riscv64-vivo-blueos-static", riscv64_vivo_blueos_static),
     ("riscv32-vivo-blueos", riscv32_vivo_blueos),
+    ("riscv32-vivo-blueos-static",riscv32_vivo_blueos_static),
     ("riscv32imc-vivo-blueos", riscv32imc_vivo_blueos),
+    ("riscv32imc-vivo-blueos-static", riscv32imc_vivo_blueos_static),
 }
 
 /// Cow-Vec-Str: Cow<'static, [Cow<'static, str>]>
@@ -3464,10 +3470,10 @@ impl Target {
 
         // Each field should have been read using `Json::remove` so any keys remaining are unused.
         let remaining_keys = obj.keys();
-        Ok((base, TargetWarnings {
-            unused_fields: remaining_keys.cloned().collect(),
-            incorrect_type,
-        }))
+        Ok((
+            base,
+            TargetWarnings { unused_fields: remaining_keys.cloned().collect(), incorrect_type },
+        ))
     }
 
     /// Load a built-in target
